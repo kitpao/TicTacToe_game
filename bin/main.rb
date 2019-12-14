@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #!/usr/bin/env ruby
 require 'timeout'
 
@@ -10,44 +12,71 @@ while welcome_input == 1
     welcome_input = gets.chomp.to_i
   end
   if welcome_input == 1
-    puts "HERE GOES THE INSTRUCTIONS" 
+    puts "HERE GOES THE INSTRUCTIONS"
     puts "Press enter to continue"
     exit = gets.chomp
   end
 end
 puts "Loading!!"
 sleep(1)
-player_one_name = ''
-player_two_name = ''
+p_one_name = ''
+p_two_name = ''
 lop = true
 while lop
   puts "Player 1: Enter your name?"
   begin
-    player_one_name = Kernel.gets.match("[a-zA-Z]+.*")
+    p_one_name = Kernel.gets.chomp.match("[a-zA-Z]+.*").string
   rescue
     puts "Please do not use only numbers on your name!!"
-  else  
+  else
     lop = false
-  end  
+  end
 end
 
 lop2 = true
 while lop2
   puts "Player 2: Enter your name?"
   begin
-    player_two_name = Kernel.gets.match("[a-zA-Z]+.*")
+    p_two_name = Kernel.gets.chomp.match("[a-zA-Z]+.*").string
   rescue
     puts "Please do not use only numbers on your name!!"
-  else  
+  else
     lop2 = false
-  end  
+  end
 end
 
-puts "-------------Let's begin #{player_one_name} VS #{player_two_name}-------------"
+puts "-------------Let's begin #{p_one_name} VS #{p_two_name}-------------"
 puts "Score"
-player_one_score = 0
-player_two_score = 0
-puts "#{player_one_name} : #{player_one_score}"
-puts "#{player_two_name} : #{player_two_score}" 
+p_one_score = 0
+p_two_score = 0
+puts "#{p_one_name}".ljust(10) + ": #{p_one_score}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_score}".rjust(10)
+puts ""
+puts "#{p_one_name}: pick a number in the board to start"
+puts "BOARD".center(20)
+puts "|1|2|3|".center(20)
+puts "|4|5|6|".center(20)
+puts "|7|8|9|".center(20)
+available = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+p_one_selection = [1,2,3,4,5]
+p_two_selection = []
 
+while p_one_selection.size + p_two_selection.size < 5
+  p_one_input= gets.chomp.to_i
+  while !available.include?(p_one_input)
+    puts "Please select a number from the board"
+    p_one_input = gets.chomp
+  end
+  p_one_selection << p_one_input
+  available[p_one_input-1] = "-"
+end
 
+while 5 <= p_one_selection.size + p_two_selection.size && p_one_selection.size + p_two_selection.size <=9
+  p_one_input= gets.chomp.to_i
+  while !available.include?(p_one_input)
+    puts "Please select a number from the board"
+    p_one_input = gets.chomp
+  end
+  p_one_selection << p_one_input
+  available[p_one_input-1] = "-"
+end
