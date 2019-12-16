@@ -57,7 +57,6 @@ puts ""
 
 turn = 0
 while !new_game.winner
-
   puts "BOARD".center(20)
   print ''.center(6)
   for slot in new_game.available_board do
@@ -71,91 +70,28 @@ while !new_game.winner
   new_game.turn = new_game.next_turn(turn)
   if new_game.turn
     puts "#{p_one.name}, pick a number:"
-    p_one_move = gets.chomp
+    p_one_move = gets.chomp.to_i
+    while !new_game.available_board.include?(p_one_move)
+      puts "Please select one of the available options"
+      p_one_move = gets.chomp.to_i
+    end
+
     # p_one_selection << player_one_move
+
   else
     puts "#{p_two.name}, pick a number:"
-    p_one_move = gets.chomp
+    p_one_move = gets.chomp.to_i
+    while !new_game.available_board.include?(p_one_move)
+      puts "Please select one of the available options"
+      p_two_move = gets.chomp.to_i
+    end
     # p_one_selection << player_one_move
   end
   turn += 1
-  print turn
-  print new_game.turn
-  print "ENd of the while"
+  #print turn
+  #print new_game.turn
+  #print "ENd of the while"
 end
 
-
-
-# p "Movements"
-# puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-# puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-# puts "Display board"
-
-
-puts "#{p_two_name}:"
-p_two_move = gets.chomp
-p_two_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "#{p_one_name}:"
-p_one_move = gets.chomp
-p_one_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "#{p_two_name}:"
-p_two_move = gets.chomp
-p_two_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "#{p_one_name}:"
-p_one_move = gets.chomp
-p_one_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "Starting with this movement we will check for a winer!!"
-
-puts "#{p_two_name}:"
-p_two_move = gets.chomp
-p_two_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "#{p_one_name}:"
-p_one_move = gets.chomp
-p_one_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "#{p_two_name}:"
-p_two_move = gets.chomp
-p_two_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "#{p_one_name}:"
-p_one_move = gets.chomp
-p_one_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
 
 puts "If anyone wins display a message --This is a tie-- reset the game to play again"
