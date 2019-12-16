@@ -67,9 +67,21 @@ while !new_game.winner
       print "|\n"
       print ''.center(6)
     end
-    
+
   end
   puts ""
+
+  start_checking = new_game.checker(p_one.selection, p_two.selection)
+
+  if start_checking
+    p_one_wins = p_one.winner(p_one.selection)
+    p_two_wins = p_two.winner(p_two.selection)
+    if p_one_wins || p_two_wins
+      new_game.winner = true
+    end
+  end
+  break if new_game.winner
+
   new_game.turn = new_game.next_turn(turn)
   if new_game.turn
     puts "#{p_one.name}, pick a number:"
@@ -80,10 +92,6 @@ while !new_game.winner
     end
     p_one.selection << p_one.move
     new_game.update_board(p_one.move, turn)
-    print new_game.available_board
-    print "THese are my moves"
-    print p_one.selection
-
   else
     puts "#{p_two.name}, pick a number:"
     p_two.move = gets.chomp.to_i
@@ -93,15 +101,14 @@ while !new_game.winner
     end
     p_two.selection << p_two.move
     new_game.update_board(p_two.move, turn)
-    print new_game.available_board
-    print "THese are your moves"
-    print p_two.selection
   end
+
+
   turn += 1
   #print turn
   #print new_game.turn
   #print "ENd of the while"
+break if (p_one.selection.size + p_two.selection.size) == 9
+
 end
-
-
-puts "If anyone wins display a message --This is a tie-- reset the game to play again"
+puts "--This is a tie--" if new_game.winner == false

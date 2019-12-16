@@ -4,10 +4,10 @@ class Game
   attr_accessor :available_board
   attr_accessor :winner
   attr_accessor :turn
-  def initialize 
+  def initialize
     self.turn = true
     self.winner = false
-    self.available_board = [1, 2, 3, 4, 5, 6, 'O', 8, 9]
+    self.available_board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
 
   def next_turn(turn)
@@ -18,6 +18,11 @@ class Game
   def update_board(move, turn)
     available_board[move -1] = 'X' if turn.odd?
     available_board[move -1] = 'O' if turn.even?
+  end
+
+  def checker(p1_mov, p2_mov)
+    return false unless p1_mov.size + p2_mov.size >= 5
+    true
   end
 
 end
@@ -32,5 +37,21 @@ class Player
     self.move = 0
     self.selection = []
   end
-  
+
+  def winner(selection)
+    possibilities = [[1,2,3],[4,5,6],[7,8,9],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+    sorted = selection.sort
+
+    print "#{self.name} is the winner!!!!!!" if possibilities.include?(sorted)
+    true
+
+
+    #for x in possibilities
+    #  if sorted == possibilities
+    #  if available[effe] == "X" || "O"
+    #    return "winner is #{self.name}"
+    #  end
+
+  end
+
 end
