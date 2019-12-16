@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 #!/usr/bin/env ruby
-require 'timeout'
+# frozen_string_literal: true
 
 welcome_input = 1
 while welcome_input == 1
@@ -19,8 +17,6 @@ while welcome_input == 1
 end
 puts "Loading!!"
 sleep(1)
-p_one_name = ''
-p_two_name = ''
 lop = true
 while lop
   puts "Player 1: Enter your name?"
@@ -46,37 +42,92 @@ while lop2
 end
 
 puts "-------------Let's begin #{p_one_name} VS #{p_two_name}-------------"
-puts "Score"
-p_one_score = 0
-p_two_score = 0
-puts "#{p_one_name}".ljust(10) + ": #{p_one_score}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_score}".rjust(10)
+p "Movements"
+p_one_selection = []
+p_two_selection = []
+puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
 puts ""
-puts "#{p_one_name}: pick a number in the board to start"
+
+available = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
 puts "BOARD".center(20)
 puts "|1|2|3|".center(20)
 puts "|4|5|6|".center(20)
 puts "|7|8|9|".center(20)
-available = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-p_one_selection = [1,2,3,4,5]
-p_two_selection = []
 
-while p_one_selection.size + p_two_selection.size < 5
-  p_one_input= gets.chomp.to_i
-  while !available.include?(p_one_input)
-    puts "Please select a number from the board"
-    p_one_input = gets.chomp
-  end
-  p_one_selection << p_one_input
-  available[p_one_input-1] = "-"
-end
+puts "#{p_one_name}, pick a number:"
+p_one_move = gets.chomp
+p_one_selection << player_one_move
+p "Movements"
+puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
+puts "Display board"
 
-while 5 <= p_one_selection.size + p_two_selection.size && p_one_selection.size + p_two_selection.size <=9
-  p_one_input= gets.chomp.to_i
-  while !available.include?(p_one_input)
-    puts "Please select a number from the board"
-    p_one_input = gets.chomp
-  end
-  p_one_selection << p_one_input
-  available[p_one_input-1] = "-"
-end
+puts "#{p_two_name}:"
+p_two_move = gets.chomp
+p_two_selection << 1
+p "Movements"
+puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
+puts "Display board"
+
+puts "#{p_one_name}:"
+p_one_move = gets.chomp
+p_one_selection << 1
+p "Movements"
+puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
+puts "Display board"
+
+puts "#{p_two_name}:"
+p_two_move = gets.chomp
+p_two_selection << 1
+p "Movements"
+puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
+puts "Display board"
+
+puts "#{p_one_name}:"
+p_one_move = gets.chomp
+p_one_selection << 1
+p "Movements"
+puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
+puts "Display board"
+
+puts "Starting with this movement we will check for a winer!!"
+
+puts "#{p_two_name}:"
+p_two_move = gets.chomp
+p_two_selection << 1
+p "Movements"
+puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
+puts "Display board"
+
+puts "#{p_one_name}:"
+p_one_move = gets.chomp
+p_one_selection << 1
+p "Movements"
+puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
+puts "Display board"
+
+puts "#{p_two_name}:"
+p_two_move = gets.chomp
+p_two_selection << 1
+p "Movements"
+puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
+puts "Display board"
+
+puts "#{p_one_name}:"
+p_one_move = gets.chomp
+p_one_selection << 1
+p "Movements"
+puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
+puts "Display board"
+
+puts "If anyone wins display a message --This is a tie-- reset the game to play again"
