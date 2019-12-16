@@ -59,33 +59,43 @@ turn = 0
 while !new_game.winner
   puts "BOARD".center(20)
   print ''.center(6)
+  i = 0
   for slot in new_game.available_board do
+    i+=1
     print "|#{slot}"
-    if (slot % 3) == 0
+    if (i % 3) == 0
       print "|\n"
       print ''.center(6)
     end
+    
   end
   puts ""
   new_game.turn = new_game.next_turn(turn)
   if new_game.turn
     puts "#{p_one.name}, pick a number:"
-    p_one_move = gets.chomp.to_i
-    while !new_game.available_board.include?(p_one_move)
+    p_one.move = gets.chomp.to_i
+    while !new_game.available_board.include?(p_one.move)
       puts "Please select one of the available options"
-      p_one_move = gets.chomp.to_i
+      p_one.move = gets.chomp.to_i
     end
-
-    # p_one_selection << player_one_move
+    p_one.selection << p_one.move
+    new_game.update_board(p_one.move, turn)
+    print new_game.available_board
+    print "THese are my moves"
+    print p_one.selection
 
   else
     puts "#{p_two.name}, pick a number:"
-    p_one_move = gets.chomp.to_i
-    while !new_game.available_board.include?(p_one_move)
+    p_two.move = gets.chomp.to_i
+    while !new_game.available_board.include?(p_two.move)
       puts "Please select one of the available options"
-      p_two_move = gets.chomp.to_i
+      p_two.move = gets.chomp.to_i
     end
-    # p_one_selection << player_one_move
+    p_two.selection << p_two.move
+    new_game.update_board(p_two.move, turn)
+    print new_game.available_board
+    print "THese are your moves"
+    print p_two.selection
   end
   turn += 1
   #print turn
