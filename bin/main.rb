@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
-require 'timeout'
+
+require '../lib/game_methods'
+
+# include(../lib/game_methods.rb)
 
 welcome_input = 1
 while welcome_input == 1
@@ -18,8 +21,6 @@ while welcome_input == 1
 end
 puts "Loading!!"
 sleep(1)
-p_one_name = ''
-p_two_name = ''
 lop = true
 while lop
   puts "Player 1: Enter your name?"
@@ -28,6 +29,7 @@ while lop
   rescue
     puts "Please do not use only numbers on your name!!"
   else
+    p_one = Player.new(p_one_name)
     lop = false
   end
 end
@@ -40,34 +42,55 @@ while lop2
   rescue
     puts "Please do not use only numbers on your name!!"
   else
+    p_two = Player.new(p_two_name)
     lop2 = false
   end
 end
 
-puts "-------------Let's begin #{p_one_name} VS #{p_two_name}-------------"
+
+puts "-------------Let's begin #{p_one.name} VS #{p_two.name}-------------"
+new_game = Game.new()
 p "Movements"
-p_one_score = 0
-p_two_score = 0
-puts "#{p_one_name}".ljust(10) + ": #{p_one_score}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_score}".rjust(10)
+puts "#{p_one.name}".ljust(10) + ": #{p_one.selection.size}".rjust(10)
+puts "#{p_two.name}".ljust(10) + ": #{p_two.selection.size}".rjust(10)
 puts ""
 
-available = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-p_one_selection = []
-p_two_selection = []
+turn = 0
+while !new_game.winner
 
-puts "BOARD".center(20)
-puts "|1|2|3|".center(20)
-puts "|4|5|6|".center(20)
-puts "|7|8|9|".center(20)
+  puts "BOARD".center(20)
+  print ''.center(6)
+  for slot in new_game.available_board do
+    print "|#{slot}"
+    if (slot % 3) == 0
+      print "|\n"
+      print ''.center(6)
+    end
+  end
+  puts ""
+  new_game.turn = new_game.next_turn(turn)
+  if new_game.turn
+    puts "#{p_one.name}, pick a number:"
+    p_one_move = gets.chomp
+    # p_one_selection << player_one_move
+  else
+    puts "#{p_two.name}, pick a number:"
+    p_one_move = gets.chomp
+    # p_one_selection << player_one_move
+  end
+  turn += 1
+  print turn
+  print new_game.turn
+  print "ENd of the while"
+end
 
-puts "#{p_one_name}:"
-p_one_move = gets.chomp
-p_one_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
+
+
+# p "Movements"
+# puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
+# puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
+# puts "Display board"
+
 
 puts "#{p_two_name}:"
 p_two_move = gets.chomp
