@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require '../lib/game_methods'
+require_relative '../lib/game_methods'
 
 welcome_input = 1
 while welcome_input == 1
@@ -105,6 +105,9 @@ while !new_game.winner
     if p_one_wins || p_two_wins
       new_game.winner = true
     end
+    puts "CONGRATS!!!! #{p_one_name.upcase}.. You are the winner!!!!!!" if p_one_wins
+    puts "CONGRATS!!!! #{p_two_name.upcase}.. You are the winner!!!!!!" if p_two_wins
+
   end
   break if (p_one.selection.size + p_two.selection.size) == 9
 
