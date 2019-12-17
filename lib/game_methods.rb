@@ -39,19 +39,16 @@ class Player
   end
 
   def winner(selection)
+
     possibilities = [[1,2,3],[4,5,6],[7,8,9],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
     sorted = selection.sort
-
-    print "#{self.name} is the winner!!!!!!" if possibilities.include?(sorted)
-    true
-
-
-    #for x in possibilities
-    #  if sorted == possibilities
-    #  if available[effe] == "X" || "O"
-    #    return "winner is #{self.name}"
-    #  end
-
+    for x in possibilities
+      if sorted & x == x
+        puts "CONGRATS!!!! #{self.name.upcase}.. You are the winner!!!!!!" 
+        return true 
+      end
+    end
+    return false
   end
 
 end

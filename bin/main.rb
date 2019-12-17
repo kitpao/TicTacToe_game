@@ -3,11 +3,9 @@
 
 require '../lib/game_methods'
 
-# include(../lib/game_methods.rb)
-
 welcome_input = 1
 while welcome_input == 1
-  puts "Welcome to Tic Tac Toe, type 1 for 'how to play' or 2 to begin game"
+  puts "Welcome to Tic Tac Toe, type 1 for 'how to play' or 2 to begin the game"
   welcome_input = gets.chomp.to_i
   while welcome_input != 1 && welcome_input != 2
     puts "Please select 1 (instructions) or 2 (begin)"
@@ -16,11 +14,18 @@ while welcome_input == 1
   if welcome_input == 1
     puts "HERE GOES THE INSTRUCTIONS"
     puts "Press enter to continue"
-    exit = gets.chomp
+    exit = gets
   end
 end
-puts "Loading!!"
-sleep(1)
+print "Loading"
+sleep(0.1)
+print "!"
+sleep(0.2)
+print "!"
+sleep(0.3)
+print "!"
+sleep(0.4)
+puts "!"
 lop = true
 while lop
   puts "Player 1: Enter your name?"
@@ -71,17 +76,6 @@ while !new_game.winner
   end
   puts ""
 
-  start_checking = new_game.checker(p_one.selection, p_two.selection)
-
-  if start_checking
-    p_one_wins = p_one.winner(p_one.selection)
-    p_two_wins = p_two.winner(p_two.selection)
-    if p_one_wins || p_two_wins
-      new_game.winner = true
-    end
-  end
-  break if new_game.winner
-
   new_game.turn = new_game.next_turn(turn)
   if new_game.turn
     puts "#{p_one.name}, pick a number:"
@@ -103,12 +97,26 @@ while !new_game.winner
     new_game.update_board(p_two.move, turn)
   end
 
-
   turn += 1
-  #print turn
-  #print new_game.turn
-  #print "ENd of the while"
-break if (p_one.selection.size + p_two.selection.size) == 9
+  start_checking = new_game.checker(p_one.selection, p_two.selection)
+  if start_checking
+    p_one_wins = p_one.winner(p_one.selection)
+    p_two_wins = p_two.winner(p_two.selection)
+    if p_one_wins || p_two_wins
+      new_game.winner = true
+    end
+  end
+  break if (p_one.selection.size + p_two.selection.size) == 9
 
 end
-puts "--This is a tie--" if new_game.winner == false
+puts "-This is a tie-" if new_game.winner == false
+print ''.center(6)
+i = 0
+for slot in new_game.available_board do
+  i+=1
+  print "|#{slot}"
+  if (i % 3) == 0
+    print "|\n"
+    print ''.center(6)
+  end
+end
