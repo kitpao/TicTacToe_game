@@ -15,7 +15,7 @@ while welcome_input == 1
   if welcome_input == 1
     print "INSTRUCTIONS"
     puts "
-    * Tic-tac-toe is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid. 
+    * Tic-tac-toe is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid.
     * The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner."
     puts "Press enter to continue"
     exit = gets
@@ -102,18 +102,26 @@ while !new_game.winner
   end
 
   turn += 1
-  start_checking = new_game.checker(p_one.selection, p_two.selection)
+  start_checking = new_game.checker(turn)
   if start_checking
     p_one_wins = p_one.winner(p_one.selection)
     p_two_wins = p_two.winner(p_two.selection)
     if p_one_wins || p_two_wins
       new_game.winner = true
+      print "CONGRATS!!!! the winner is"
+      sleep(0.1)
+      print "."
+      sleep(0.2)
+      print "."
+      sleep(0.3)
+      print "."
+      sleep(0.6)
     end
-    puts "CONGRATS!!!! #{p_one_name.upcase}.. You are the winner!!!!!!" if p_one_wins
-    puts "CONGRATS!!!! #{p_two_name.upcase}.. You are the winner!!!!!!" if p_two_wins
 
+    puts "#{p_one_name.upcase}!!!!!!" if p_one_wins
+    puts "#{p_two_name.upcase}!!!!!!" if p_two_wins
   end
-  break if (p_one.selection.size + p_two.selection.size) == 9
+  break if turn == 9
 
 end
 puts "-This is a tie-" if new_game.winner == false

@@ -2,11 +2,10 @@
 
 class Game
   attr_reader :available_board
-  attr_accessor :winner
-  attr_accessor :turn
+  attr_accessor :winner, :turn
   def initialize
-    @turn = true
-    @winner = false
+    self.turn = true
+    self.winner = false
     @available_board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
 
@@ -21,8 +20,8 @@ class Game
     available_board[move - 1] = 'O' if turn.even?
   end
 
-  def checker(p1_mov, p2_mov)
-    return false unless p1_mov.size + p2_mov.size >= 5
+  def checker(turn)
+    return false unless turn >= 5
 
     true
   end

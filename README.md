@@ -58,7 +58,7 @@ Now you can play in the console!!
 
 <h3>Instruction</h3>
 
-* Tic-tac-toe is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid. 
+* Tic-tac-toe is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid.
 * The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.
 * The following example game is won by the first player, X:
 
@@ -74,7 +74,7 @@ See the [open issues](https://github.com/kitpao/TicTacToe_game/issues) for a lis
   Project Link: [https://github.com/kitpao/TicTacToe_game](https://github.com/kitpao/TicTacToe_game)
 
 <p align="center">
-  
+
   Kitzia Paola Vidal Marroquin - [Github user: kitpao](https://github.com/kitpao)
 </p>
 <p align="center" style="display: flex; justify-content: center; align-items: center;">
@@ -93,7 +93,7 @@ See the [open issues](https://github.com/kitpao/TicTacToe_game/issues) for a lis
 </p>
 
 <p align="center">
-  
+
   Yair Fernando Facio - [YairFernando67](https://github.com/YairFernando67)
 </p>
 <p align="center" style="display: flex; justify-content: center; align-items: center;">
