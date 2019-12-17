@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
-require 'timeout'
+
+require_relative '../lib/game_methods'
+require_relative '../lib/player_methods'
 
 welcome_input = 1
 while welcome_input == 1
-  puts "Welcome to Tic Tac Toe, type 1 for 'how to play' or 2 to begin game"
+  puts "Welcome to Tic Tac Toe, type 1 for 'how to play' or 2 to begin the game"
   welcome_input = gets.chomp.to_i
   while welcome_input != 1 && welcome_input != 2
     puts "Please select 1 (instructions) or 2 (begin)"
@@ -13,13 +15,18 @@ while welcome_input == 1
   if welcome_input == 1
     puts "HERE GOES THE INSTRUCTIONS"
     puts "Press enter to continue"
-    exit = gets.chomp
+    exit = gets
   end
 end
-puts "Loading!!"
-sleep(1)
-p_one_name = ''
-p_two_name = ''
+print "Loading"
+sleep(0.1)
+print "!"
+sleep(0.2)
+print "!"
+sleep(0.3)
+print "!"
+sleep(0.4)
+puts "!"
 lop = true
 while lop
   puts "Player 1: Enter your name?"
@@ -28,6 +35,7 @@ while lop
   rescue
     puts "Please do not use only numbers on your name!!"
   else
+    p_one = Player.new(p_one_name)
     lop = false
   end
 end
@@ -40,99 +48,79 @@ while lop2
   rescue
     puts "Please do not use only numbers on your name!!"
   else
+    p_two = Player.new(p_two_name)
     lop2 = false
   end
 end
 
-puts "-------------Let's begin #{p_one_name} VS #{p_two_name}-------------"
+
+puts "-------------Let's begin #{p_one.name} VS #{p_two.name}-------------"
+new_game = Game.new()
 p "Movements"
-p_one_score = 0
-p_two_score = 0
-puts "#{p_one_name}".ljust(10) + ": #{p_one_score}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_score}".rjust(10)
+puts "#{p_one.name}".ljust(10) + ": #{p_one.selection.size}".rjust(10)
+puts "#{p_two.name}".ljust(10) + ": #{p_two.selection.size}".rjust(10)
 puts ""
 
-available = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-p_one_selection = []
-p_two_selection = []
+turn = 0
+while !new_game.winner
+  puts "BOARD".center(20)
+  print ''.center(6)
+  i = 0
+  for slot in new_game.available_board do
+    i+=1
+    print "|#{slot}"
+    if (i % 3) == 0
+      print "|\n"
+      print ''.center(6)
+    end
 
-puts "BOARD".center(20)
-puts "|1|2|3|".center(20)
-puts "|4|5|6|".center(20)
-puts "|7|8|9|".center(20)
+  end
+  puts ""
 
-puts "#{p_one_name}:"
-p_one_move = gets.chomp
-p_one_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
+  new_game.turn = new_game.next_turn(turn)
+  if new_game.turn
+    puts "#{p_one.name}, pick a number:"
+    p_one.move = gets.chomp.to_i
+    while !new_game.available_board.include?(p_one.move)
+      puts "Please select one of the available options"
+      p_one.move = gets.chomp.to_i
+    end
+    p_one.selection << p_one.move
+    new_game.update_board(p_one.move, turn)
+  else
+    puts "#{p_two.name}, pick a number:"
+    p_two.move = gets.chomp.to_i
+    while !new_game.available_board.include?(p_two.move)
+      puts "Please select one of the available options"
+      p_two.move = gets.chomp.to_i
+    end
+    p_two.selection << p_two.move
+    new_game.update_board(p_two.move, turn)
+  end
 
-puts "#{p_two_name}:"
-p_two_move = gets.chomp
-p_two_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
+  turn += 1
+  start_checking = new_game.checker(p_one.selection, p_two.selection)
+  if start_checking
+    p_one_wins = p_one.winner(p_one.selection)
+    p_two_wins = p_two.winner(p_two.selection)
+    if p_one_wins || p_two_wins
+      new_game.winner = true
+    end
+    puts "CONGRATS!!!! #{p_one_name.upcase}.. You are the winner!!!!!!" if p_one_wins
+    puts "CONGRATS!!!! #{p_two_name.upcase}.. You are the winner!!!!!!" if p_two_wins
 
-puts "#{p_one_name}:"
-p_one_move = gets.chomp
-p_one_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
+  end
+  break if (p_one.selection.size + p_two.selection.size) == 9
 
-puts "#{p_two_name}:"
-p_two_move = gets.chomp
-p_two_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "#{p_one_name}:"
-p_one_move = gets.chomp
-p_one_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "Starting with this movement we will check for a winer!!"
-
-puts "#{p_two_name}:"
-p_two_move = gets.chomp
-p_two_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "#{p_one_name}:"
-p_one_move = gets.chomp
-p_one_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "#{p_two_name}:"
-p_two_move = gets.chomp
-p_two_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "#{p_one_name}:"
-p_one_move = gets.chomp
-p_one_selection << 1
-p "Movements"
-puts "#{p_one_name}".ljust(10) + ": #{p_one_selection.size}".rjust(10)
-puts "#{p_two_name}".ljust(10) + ": #{p_two_selection.size}".rjust(10)
-puts "Display board"
-
-puts "If anyone wins display a message --This is a tie-- reset the game to play again"
+end
+puts "-This is a tie-" if new_game.winner == false
+print ''.center(6)
+i = 0
+for slot in new_game.available_board do
+  i+=1
+  print "|#{slot}"
+  if (i % 3) == 0
+    print "|\n"
+    print ''.center(6)
+  end
+end
