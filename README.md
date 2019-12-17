@@ -63,7 +63,7 @@ Now you can play in the console!!
 * The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.
 * The following example game is won by the first player, X:
 
-[![Product Name Screen Shot][product-example]]
+![Product Name Screen Shot][product-example]
 
 ## Roadmap
 
