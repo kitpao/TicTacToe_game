@@ -13,7 +13,10 @@ while welcome_input == 1
     welcome_input = gets.chomp.to_i
   end
   if welcome_input == 1
-    puts "HERE GOES THE INSTRUCTIONS"
+    print "INSTRUCTIONS"
+    puts "
+    * Tic-tac-toe is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid. 
+    * The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner."
     puts "Press enter to continue"
     exit = gets
   end
