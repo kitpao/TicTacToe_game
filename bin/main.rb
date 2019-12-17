@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require_relative '../lib/game_methods'
+require_relative '../lib/player_methods'
 
 welcome_input = 1
 while welcome_input == 1
