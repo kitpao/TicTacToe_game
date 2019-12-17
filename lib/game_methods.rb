@@ -12,43 +12,41 @@ class Game
 
   def next_turn(turn)
     return false if turn.odd?
-    return true
+
+    true
   end
 
   def update_board(move, turn)
-    available_board[move -1] = 'X' if turn.odd?
-    available_board[move -1] = 'O' if turn.even?
+    available_board[move - 1] = 'X' if turn.odd?
+    available_board[move - 1] = 'O' if turn.even?
   end
 
   def checker(p1_mov, p2_mov)
     return false unless p1_mov.size + p2_mov.size >= 5
+
     true
   end
-
 end
-
 
 class Player
   attr_accessor :name
   attr_accessor :selection
   attr_accessor :move
-  def initialize (name)
+  def initialize(name)
     self.name = name
     self.move = 0
     self.selection = []
   end
 
   def winner(selection)
-
-    possibilities = [[1,2,3],[4,5,6],[7,8,9],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+    possibilities = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
     sorted = selection.sort
-    for x in possibilities
+    possibilities.each do |x|
       if sorted & x == x
-        puts "CONGRATS!!!! #{self.name.upcase}.. You are the winner!!!!!!" 
-        return true 
+        puts "CONGRATS!!!! #{name.upcase}.. You are the winner!!!!!!"
+        return true
       end
     end
-    return false
+    false
   end
-
 end
