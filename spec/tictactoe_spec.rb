@@ -30,4 +30,15 @@ RSpec.describe 'Tic Tac Toe Game' do
       expect(board).to eq([1, 'X', 3, 4, 5, 'O', 7, 8, 9])
     end
   end
+
+  describe '#checker' do
+    it 'when the game is able to receive a winner' do
+      expect(this_game.checker(5)).to be true
+    end
+
+    it 'when the game is not ready to receive a winner' do
+      expect(this_game.checker(1)).to be false
+    end
+  end
+
 end
