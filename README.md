@@ -27,6 +27,7 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Usage](#usage)
+* [Test](#test)
 * [Roadmap](#roadmap)
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
@@ -63,6 +64,14 @@ Now you can play in the console!!
 * The following example game is won by the first player, X:
 
 ![Product Name Screen Shot][product-example]
+
+## Test
+
+For the test, click on the image at the top or in the following [link](https://gitpod.io/github.com/kitpao/TicTacToe_game),
+
+* Click on the console and type `gem install rspec` then press enter to begin the instalation process
+* Once the process is done, type `rspec` and press enter to see the 10 test for this game
+* You can see the test files by clicking on the left panel spec/tictactoe_spec.rb
 
 ## Roadmap
 
