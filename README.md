@@ -26,6 +26,7 @@
 ## Table of Contents
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
+* [Future Features](#future-features)
 * [Usage](#usage)
 * [Test](#test)
 * [Roadmap](#roadmap)
@@ -47,6 +48,9 @@ In this project we developed our own version of the game Tic Tac Toe using the n
 The project was developed using the following technologies:
 - [RUBY](https://www.ruby-lang.org/es/)
 - [RUBOCOP LINTERN](https://github.com/microverseinc/linters-config/tree/master/ruby)
+
+## Future Features
+* Play against computer
 
 ## Usage
 
